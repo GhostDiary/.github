@@ -1,6 +1,6 @@
 app:
   auth:
-    tokenSecret: 76EA5CDA2FFD3D8EBCB16E5446AD8
+    tokenSecret: ENC(B5Oqps/a/gexDFbza7EkeNDAZSyvBeY9CN88D9aapL8ZZw3S5fhJEA==)
     tokenExpirationMsec: 864000000
   oauth2:
     authorizedRedirectUris:

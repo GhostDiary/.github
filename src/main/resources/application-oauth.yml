@@ -4,6 +4,6 @@ spring:
       client:
         registration:
           google :
-            client-id : 952008258712-ofadfqepnuq9mjpcls6kolnfbhqiiv3t.apps.googleusercontent.com
-            client-secret : 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
+            client-id : ENC(bXlVUfbCPJD+m7jzPylB6j9izpSit7IP+Sav8juo6l9fZiqnybBJqHGsxxKGVEIzSENgCekDqs/rPHFvYvTLwqkOvCWBEey2+lcIVkcqMdSQtdFVDEZipA==)
+            client-secret : ENC(991+PMBdENwRMWFDeiv43MOCsMtXgcfNAB+Egr9RSUAPVtS/lDfaKqG65LU+YGWq)
             scope : email,profile

@@ -15,6 +15,7 @@ public class GetDayDetails {
     public GetDayDetails() {
     }
 
+    private int dayEmotionId;
     private Date date;
     private int dateEmotion;
     private int whoEmo;

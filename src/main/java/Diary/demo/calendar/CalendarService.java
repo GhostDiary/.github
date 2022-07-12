@@ -31,4 +31,16 @@ public class CalendarService {
     public GetDayDetails getDayDetails(int userId, int dayEmotionId){
         return calendarRepository.getDayDetailsInfo(userId, dayEmotionId);
     }
+
+    public PostCalendarRes modifyDayDetails(PostCalendar postCalendar,int dayEmotionId) {
+        return calendarRepository.updateDayEmotion(postCalendar,dayEmotionId);
+    }
+
+    public void deleteDayEmotion(int dayEmotionId) {
+        calendarRepository.deleteDayEmotionId(dayEmotionId);
+    }
+
+    public List<GetCalendarRes> getDayEmotionListByEmotion(int userId, String monthName, int dateEmotion) {
+        return calendarRepository.getDayEmotionListByDateEmotion(userId, monthName, dateEmotion);
+    }
 }

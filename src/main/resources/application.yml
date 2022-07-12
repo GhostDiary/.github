@@ -11,7 +11,11 @@ spring:
     username: ENC(hrMkiDRA80v3lH+gTuHlcQ==)
     password: ENC(1K+W1XBeHPsXDVHLqP3z/RlsUuTjxS6U)
 
-
+  profiles:
+    group:
+      local:
+        oauth,app
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
+

@@ -1,0 +1,7 @@
+app:
+  auth:
+    tokenSecret: 76EA5CDA2FFD3D8EBCB16E5446AD8
+    tokenExpirationMsec: 864000000
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:9000/oauth2/token

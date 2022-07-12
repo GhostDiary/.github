@@ -69,6 +69,7 @@ public class CalendarRepository {
 
         return jdbcTemplate.queryForObject(query,
                 (rs, rowNum) -> new GetDayDetails(
+                        rs.getInt("dayEmotionId"),
                         rs.getDate("date"),
                         rs.getInt("dateEmotion"),
                         rs.getInt("whoEmo"),
@@ -87,6 +88,55 @@ public class CalendarRepository {
                         rs.getString("others")
                 )
                 , params);
+    }
+
+
+    public PostCalendarRes updateDayEmotion(PostCalendar p,int dayEmotionId){
+        String query = "update dayInCalendar set userId=? ,date=?,dateEmotion=?,whoEmo=?,whoText=?,whatEmo=?," +
+                "whatText=?,moodEmo=?,moodText=?,sentimentEmo=?,sentimentText=?,sleepStart=?,sleepEnd=?,menses=?,others=? " +
+                "where dayEmotionId=?";
+
+        Object[] params = new Object[]{p.getUserId(), p.getDate(), p.getDateEmotion(), p.getWhoEmo(), p.getWhoText()
+                ,p.getWhatEmo(),p.getWhatText(),p.getMoodEmo(),p.getMoodText(),p.getSentimentEmo(),p.getSentimentText(),p.getSleepStart(),p.getSleepEnd(),
+                p.getMenses(),p.getOthers(),dayEmotionId
+        };
+
+        jdbcTemplate.update(query, params);
+
+        String queryForReturn = "select dayEmotionId,date,dateEmotion\n" +
+                "from dayInCalendar\n" +
+                "where dayEmotionId =?\n";
+
+        int param = dayEmotionId;
+
+        return jdbcTemplate.queryForObject(queryForReturn,
+                (rs, rowNum) -> new PostCalendarRes(
+                        rs.getInt("dayEmotionId"),
+                        rs.getDate("date"),
+                        rs.getInt("dateEmotion")
+
+                ), param);
+    }
+
+    public int deleteDayEmotionId(int dayEmotionId) {
+        String query = "delete from dayInCalendar where dayEmotionId =?";
+        int param = dayEmotionId;
+
+        return jdbcTemplate.update(query,param);
+    }
+
+    public List<GetCalendarRes> getDayEmotionListByDateEmotion(int userId, String monthName, int dateEmotion){
+        String query = "SELECT userId,dayEmotionId,date,dateEmotion FROM dayInCalendar where userId = ? and MONTHNAME(date) = ? and dateEmotion =?";
+        Object[] params = {userId,monthName,dateEmotion};
+
+        return jdbcTemplate.query(query,
+                (rs, rowNum) -> new GetCalendarRes(
+                        rs.getInt("userId"),
+                        rs.getInt("dayEmotionId"),
+                        rs.getDate("date"),
+                        rs.getInt("dateEmotion")
+                ),params
+        );
     }
 
 }

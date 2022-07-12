@@ -1,6 +1,7 @@
 package Diary.demo.memo;
 
 import Diary.demo.memo.model.GetMemoRes;
+import Diary.demo.memo.model.PostMemoReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -50,5 +51,32 @@ public class MemoRepository {
                         rs.getString("text")
                 )
         ), param);
+    }
+
+    public List<GetMemoRes> getMemoListByType(String type) {
+        String query = "SELECT * FROM memo WHERE type= ?";
+        String param = type;
+        return jdbcTemplate.query(query, (
+                (rs, rowNum) -> new GetMemoRes(
+                        rs.getInt("memoId"),
+                        rs.getString("type"),
+                        rs.getString("title"),
+                        rs.getString("text")
+                )
+        ), param);
+    }
+
+    public int updateMemo(int memoId, String type, String title, String text) {
+        String query = "UPDATE memo SET type =? ,title =? , text =? where memoId =?";
+        Object[] params = {type, title, text, memoId};
+
+        return jdbcTemplate.update(query, params);
+    }
+
+    public int deleteMemo(int memoId) {
+        String query = "delete from memo where memoId =?";
+        int param = memoId;
+
+        return jdbcTemplate.update(query, param);
     }
 }

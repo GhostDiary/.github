@@ -29,4 +29,16 @@ public class MemoService {
     public List<GetMemoRes> getMemoListByUserId(int userId) {
         return memoRepository.getMemoListByUserId(userId);
     }
+    /** userId 관련 validation 추가 */
+    public List<GetMemoRes> getMemoListByType(int userId,String type){
+        return memoRepository.getMemoListByType(type);
+    }
+
+    public int modifyMemo(int memoId,PostMemoReq postMemoReq){
+        return memoRepository.updateMemo(memoId,postMemoReq.getType(), postMemoReq.getTitle(), postMemoReq.getText());
+    }
+
+    public int deleteMemo(int memoId){
+        return memoRepository.deleteMemo(memoId);
+    }
 }

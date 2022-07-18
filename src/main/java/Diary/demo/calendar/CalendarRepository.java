@@ -25,12 +25,13 @@ public class CalendarRepository {
 
     public PostCalendarRes insertDayEmotion(PostCalendar p){
         String query = "insert into dayInCalendar(userId,date,dateEmotion,whoEmo,whoText,whatEmo," +
-                "whatText,moodEmo,moodText,sentimentEmo,sentimentText,sleepStart,sleepEnd,menses,others) " +
-                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "whatText,whereEmo,whereText,moodEmo,moodText,sentimentEmo,sentimentText,sleepStart,sleepEnd,menses,others,imgUrl) " +
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         Object[] params = new Object[]{p.getUserId(), p.getDate(), p.getDateEmotion(), p.getWhoEmo(), p.getWhoText()
-        ,p.getWhatEmo(),p.getWhatText(),p.getMoodEmo(),p.getMoodText(),p.getSentimentEmo(),p.getSentimentText(),p.getSleepStart(),p.getSleepEnd(),
-                p.getMenses(),p.getOthers()
+                , p.getWhatEmo(), p.getWhatText(), p.getWhereEmo(), p.getWhereText(), p.getMoodEmo(), p.getMoodText(),
+                p.getSentimentEmo(), p.getSentimentText(), p.getSleepStart(), p.getSleepEnd(),
+                p.getMenses(), p.getOthers(), p.getImgUrl()
         };
         jdbcTemplate.update(query, params);
         int param = jdbcTemplate.queryForObject("select last_insert_id()", int.class);
@@ -69,6 +70,7 @@ public class CalendarRepository {
 
         return jdbcTemplate.queryForObject(query,
                 (rs, rowNum) -> new GetDayDetails(
+                        rs.getString("imgUrl"),
                         rs.getInt("dayEmotionId"),
                         rs.getDate("date"),
                         rs.getInt("dateEmotion"),

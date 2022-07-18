@@ -49,7 +49,7 @@ public class MemoController {
         return new BaseResponse<>(memoId);
     }
 
-    @DeleteMapping("/{memoId}")  //캘린더 일별 내용 삭제 api
+    @DeleteMapping("/{memoId}")  //memo 삭제 api
     public BaseResponse<String> deleteMemo(@PathVariable int memoId) {
         memoService.deleteMemo(memoId);
         return new BaseResponse<>("삭제가 완료되었습니다.");

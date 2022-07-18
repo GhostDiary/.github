@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
+
 
 @Getter
 @Setter
@@ -15,6 +17,7 @@ public class GetDayDetails {
     public GetDayDetails() {
     }
 
+    private String imgUrl;
     private int dayEmotionId;
     private Date date;
     private int dateEmotion;
